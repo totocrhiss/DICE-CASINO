@@ -149,6 +149,9 @@ function loadGLTF() {
 // numéro 1: le ressort        - number 1: the spring
 // numéro 2: le looser         - number 2: the looser
 // numéro 3: la petite cloche  - number 3: the little bell
+// numéro 4: l'armement        - number 4: the armament
+// numéro 5: le relâchement    - number 5: the release
+// numéro 6: le roulement      - number 6: the roller
 
 class Sound {
     constructor() {
@@ -198,6 +201,9 @@ class Sound {
 // numéro 1: le ressort        - number 1: the spring
 // numéro 2: le looser         - number 2: the looser
 // numéro 3: la petite cloche  - number 3: the little bell
+// numéro 4: l'armement        - number 4: the armament
+// numéro 5: le relâchement    - number 5: the release
+// numéro 6: le roulement      - number 6: the roller
 
 // sound effects of the dice (number, time * 3)
 // example of code for sound "sound.sound(0, 950, 1, 2100, 2, 3300)"
@@ -337,15 +343,61 @@ const animate = () => {
 };
 
 // ***************animation en 2 dimensions GSAP***************
-// let cr = gsap.timeline({ pause: true });
+let cr = gsap.timeline();
 
-// // suppression de la visibilité du carrer (DIV)
-// document.querySelector(".carrer").style.display = "none";
-// // suppression de la visibilité du carrer (DIV)
+let numberPl1 = document.getElementById("numberPl1");
+let startPl1 = document.getElementById("startPl1");
+let number = 0;
 
-// bouton.addEventListener("click", () => {
-//     cr.to(".carrer", { rotation: 27, x: 100, duration: 1 });
-// });
+function loadImageNumber(value) {
+    if (value < 10) {
+        return (number = "00" + value);
+    } else if (value > 9 && value < 100) {
+        return (number = "0" + value);
+    } else {
+        return (number = "" + value);
+    }
+}
+
+// console.log(loadImageNumber(45));
+
+//******La fonction numberPl1 engendre l'animation et appelle les chiffres du résultat*****
+numberPl1.addEventListener("click", () => {
+    let sound1 = new Sound();
+    let sound2 = new Sound();
+
+    // cr.to(".carrer", { rotation: 27, x: 100, duration: 1 });
+
+    // // recherche un chiffre aléatoire de 0 à 100
+    // loadImageNumber(Math.floor(Math.random() * 101));
+    // // recherche un chiffre aléatoire de 0 à 100
+
+    // numéro 4: l'armement        - number 4: the armament
+    // numéro 5: le relâchement    - number 5: the release
+    // numéro 6: le roulement      - number 6: the roller
+
+    startPl1.src = "model-3d/Animation chiffres.webp";
+    sound1.sound(4, 170, 5, 1450);
+    sound2.sound(6, 4000);
+    // console.log(sound2);
+
+    setTimeout(() => {
+        numberPl1.setAttribute("style", "z-index: 0;");
+    }, 1600);
+
+    setTimeout(() => {
+        numberPl1.src = `image/Image ${number}.png`;
+        console.log(numberPl1);
+        console.log(number);
+        // numberPl1.src = "image/Image 001.png";
+        numberPl1.setAttribute("style", "z-index: 2;");
+        // animFix.setAttribute("src", "image/Image 005.png");
+        // animFix.setAttribute("style", "background-color:red;");
+        //  total1.style.backgroundImage = "url('')";
+        // total1.style.backgroundImage = "url('image/Image 005.png')";
+    }, 4400);
+});
+//******La fonction numberPl1 engendre l'animation et appelle les chiffres du résultat*****
 
 // ***************animation en 2 dimensions GSAP***************
 
