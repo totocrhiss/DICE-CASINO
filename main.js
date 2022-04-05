@@ -49,50 +49,141 @@ const gui = new dat.GUI();
 // GUI pour contrôler les objets et avoir la reference position source
 
 // GSAP Contrôleur d'animation
-// let tl = gsap.timeline();
-tl = gsap.timeline({ paused: true });
+let tl = gsap.timeline({ paused: true });
 // GSAP Contrôleur d'animation
 
 let Mesh;
 
 function loadGLTF() {
     let balloonLoader = new THREE.GLTFLoader();
-    balloonLoader.load("model-3d/DE3.gltf", (gltf) => {
+    balloonLoader.load("model-3d/dice.gltf", (gltf) => {
         Mesh = gltf.scene;
         Mesh.scale.set(1, 1, 1);
-        Mesh.position.y = 0;
+        console.log("cube" + Mesh.rotation.y);
+        // Mesh.position.y = 0;
         scene.add(Mesh);
 
         // GUI pour contrôler les objets et avoir la reference position source
         gui.add(Mesh.rotation, "x").min(0).max(9);
         gui.add(Mesh.rotation, "y").min(0).max(9);
         gui.add(Mesh.rotation, "z").min(0).max(9);
-
-        tl.to(Mesh.rotation, { y: 4.7, duration: 1 });
-        tl.to(Mesh.scale, { x: 0.5, y: 0.5, z: 0.5, duration: 1 }, "-=1");
-        tl.to(Mesh.position, { x: 0.5 });
-        tl.to(Mesh.rotation, { y: 4.1, duration: 1 });
-        tl.to(Mesh.scale, { x: 0.55, x: 0.55, z: 0.55, duration: 1 }, "-=1");
-        //  retour
-        tl.to(Mesh.rotation, { y: 0, duration: 1 });
-        tl.to(Mesh.position, { x: 0 });
-        tl.to(Mesh.scale, { x: 1, y: 1, z: 1, duration: 1 }, "-=1");
-
-        // Play() pour animer juste après le chargement
-        // ce qui permet de metre une pause en cours d'animation sur un click par exemple !
-        // tl.play();
     });
 }
-bouton.onclick = function() {
-    // Restart() pour animer à chaque click
-    tl.restart();
 
-    // Play() pour animer qu'une seule fois
-    // tl.play();
+bouton.addEventListener("click", () => {
+    tl.play();
 
-    // Pause()  Maitre en pause pendant une animation
-    // tl.pause()
+    AnimationOfDiceForPlayer_1();
+});
+
+// ***************Animation du dé pour le joueur 1***************
+let AnimationOfDiceForPlayer_1 = () => {
+    // fonction aléatoire
+    // let randomY = gsap.utils.random([90, 180, 270, 360, 450, 540, 630, 720]);
+    // let randomY = gsap.utils.random([450, 540, 630, 720, 810, 900, 990, 1080]);
+    // let randomX = gsap.utils.random([90, 180, 270, 360, 1170, 1260, 1350, 1440]);
+    // let randomX = gsap.utils.random([450, 540, 630, 720]);
+    // let randomX = gsap.utils.random([90, 180, 270, 360, 450, 540, 630, 720]);
+    // fonction aléatoire
+    // let valeur = (randomY + randomX) / 2;
+    //  console.log(`degré Y ${degY}`);
+    //  console.log(`degré X ${degX}`);
+
+    // console.log(`degré Y ${randomY} + degré X ${randomX} = ${randomY + randomX}/2 = ${valeur} `);
+    // console.log(`degré X ${valeur}`);
+    // let randomY = gsap.utils.random([810, 900, 990, 1080]);
+    let randomY = gsap.utils.random([450, 540, 630, 720, 810, 900, 990, 1080]);
+    //  let randomY = gsap.utils.random([450, 540, 630, 720]);
+    // let randomX = gsap.utils.random([90, 180, 270, 360]);
+    // let randomX = gsap.utils.random([1170, 1260, 1350, 1440]);
+    let randomX = gsap.utils.random([90, 180, 270, 360, 1170, 1260, 1350, 1440]);
+    // let randomY = gsap.utils.random([990]);
+    // let randomX = gsap.utils.random([1170]);
+    let degY = (randomY * Math.PI) / 180.0;
+    let degX = (randomX * Math.PI) / 180.0;
+    gsap.to(Mesh.rotation, { y: degY, x: degX, duration: 1 });
+    console.log(`degré Y ${randomY}`);
+    console.log(`degré X ${randomX}`);
+    if (
+        (randomY === 450 ||
+            randomY === 540 ||
+            randomY === 630 ||
+            randomY === 720 ||
+            randomY === 810 ||
+            randomY === 900 ||
+            randomY === 990 ||
+            randomY === 1080) &&
+        (randomX === 360 || randomX === 1440)
+    ) {
+        console.log("numéro °= 1");
+    } else if (
+        (randomY === 540 && randomX === 1350) ||
+        (randomY === 540 && randomX === 270) ||
+        (randomY === 720 && randomX === 1170) ||
+        (randomY === 720 && randomX === 90) ||
+        (randomY === 900 && randomX === 270) ||
+        (randomY === 900 && randomX === 1350) ||
+        (randomY === 1080 && randomX === 1170) ||
+        (randomY === 1080 && randomX === 90)
+    ) {
+        console.log("numéro °= 2");
+    } else if (
+        (randomY === 450 && randomX === 1350) ||
+        (randomY === 450 && randomX === 270) ||
+        (randomY === 630 && randomX === 1170) ||
+        (randomY === 630 && randomX === 90) ||
+        (randomY === 810 && randomX === 1350) ||
+        (randomY === 810 && randomX === 270) ||
+        (randomY === 990 && randomX === 1170) ||
+        (randomY === 990 && randomX === 90)
+    ) {
+        console.log("numéro °= 3");
+    } else if (
+        (randomY === 450 && randomX === 1170) ||
+        (randomY === 450 && randomX === 90) ||
+        (randomY === 630 && randomX === 1350) ||
+        (randomY === 630 && randomX === 270) ||
+        (randomY === 810 && randomX === 90) ||
+        (randomY === 810 && randomX === 1170) ||
+        (randomY === 990 && randomX === 1350) ||
+        (randomY === 990 && randomX === 270)
+    ) {
+        console.log("numéro °= 4");
+    } else if (
+        (randomY === 540 && randomX === 1170) ||
+        (randomY === 540 && randomX === 90) ||
+        (randomY === 720 && randomX === 1350) ||
+        (randomY === 720 && randomX === 270) ||
+        (randomY === 900 && randomX === 90) ||
+        (randomY === 900 && randomX === 1170) ||
+        (randomY === 1080 && randomX === 1350) ||
+        (randomY === 1080 && randomX === 270)
+    ) {
+        console.log("numéro °= 5");
+    } else if (
+        (randomY === 450 ||
+            randomY === 540 ||
+            randomY === 630 ||
+            randomY === 720 ||
+            randomY === 810 ||
+            randomY === 900 ||
+            randomY === 990 ||
+            randomY === 1080) &&
+        (randomX === 180 || randomX === 1260)
+    ) {
+        console.log("numéro °= 6");
+    } else {
+        console.log("non défini");
+    }
 };
+// ***************Animation du dé pour le joueur 1***************
+
+// ***************retourner la valeur du dé, avec les  axes x et y dans un switch***************
+// if (randomY === 90 || randomY === 180) {
+//     console.log("ca fonctionne");
+// }
+
+// ***************retourner la valeur du dé, avec les  axes x et y dans un switch***************
 
 const animate = () => {
     requestAnimationFrame(animate);
@@ -100,23 +191,18 @@ const animate = () => {
     renderer.render(scene, camera);
 };
 
-let teste = $(".carrer");
+// ***************animation en 2 dimensions GSAP***************
+let cr = gsap.timeline({ pause: true });
 
-const animateCube = () => {
-    $("#bouton").click(function() {
-        teste
-            .delay(500)
-            .velocity({ backgroundColor: "#2b37e2" })
-            .velocity({ translateX: 200 })
-            .velocity({ translateY: 200 })
-            .velocity({ translateX: -50 })
-            .velocity({ translateY: -50 })
-            .velocity({ backgroundColor: "#40e22b" })
-            .velocity({ rotateZ: "+=90" });
-    });
-};
+// suppression de la visibilité du carrer (DIV)
+document.querySelector(".carrer").style.display = "none";
+// suppression de la visibilité du carrer (DIV)
 
-animateCube();
+bouton.addEventListener("click", () => {
+    cr.to(".carrer", { rotation: 27, x: 100, duration: 1 });
+});
+
+// ***************animation en 2 dimensions GSAP***************
 
 init();
 setLight();
