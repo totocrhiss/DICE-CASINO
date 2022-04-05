@@ -1,0 +1,89 @@
+.fixed_rule {
+    position: relative;
+    top: -100%;
+    z-index: 3;
+    box-shadow: inset 0px 0px 13px -1px #2f01ff, 0px 0px 6px 1px #c0c0ff;
+    display: flex;
+    transform: translateY(-100vh);
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: max(40vw, 320px);
+    height: max(70vh, 550px);
+    background-color: rgb(153, 0, 255);
+    border-radius: 2em;
+    margin-bottom: 20%;
+    margin-top: 20%;
+}
+
+h2 {
+    position: relative;
+    top: -5%;
+    font-size: max(3vw, 35px);
+    color: #000000;
+    -webkit-text-stroke: 0.004em rgb(255, 255, 255);
+    font-weight: bold;
+    text-shadow: #fff 0px 0px 5px, #fff 0px 0px 10px, #fff 0px 0px 15px, #ff2d95 0px 0px 20px, #ff2d95 0px 0px 30px, #ff2d95 0px 0px 40px, #ff2d95 0px 0px 50px, #ff2d95 0px 0px 75px;
+}
+
+.welcome_text {
+    position: relative;
+    color: #000000;
+    font-size: max(1.5vw, 18px);
+    font-weight: bold;
+    top: -17%;
+}
+
+.text {
+    text-align: start;
+    font-size: max(1vw, 13px);
+    color: #f0f8ff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 90%;
+    height: 40%;
+    position: relative;
+    top: -2.5em;
+}
+
+.text_winner {
+    position: relative;
+    top: -1.2em;
+    color: #000000;
+    font-size: max(0.9vw, 10px);
+    font-weight: bolder;
+    transform: scaleY(1.5);
+    text-align: center;
+}
+
+.text_good_luck {
+    position: relative;
+    top: -1.9em;
+    text-align: center;
+    font-size: max(1.2vw, 15px);
+    letter-spacing: 0.1rem;
+    font-weight: bold;
+}
+
+.btn {
+    cursor: pointer;
+    font-size: max(0.1vw, 14px);
+    border-radius: 2em;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: bold;
+    padding: 0.5em;
+    color: rgb(61, 0, 141);
+    transition: all 0.5s;
+}
+
+.btn:hover {
+    font-size: max(0.1vw, 14px);
+    border-radius: 2em;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: bold;
+    padding: 0.5em;
+    background-color: rgb(61, 0, 141);
+    color: #f0f8ff;
+    transition: all 0.5s;
+}

@@ -2,6 +2,8 @@ const domCanvas = document.querySelector("#canvas");
 const bouton = document.querySelector("#bouton");
 const soundToon = document.querySelectorAll(".audio");
 const focusPlay = document.querySelector("#focusPlay");
+const centre_roulette = document.querySelector(".centre_roulette");
+const roulette = document.querySelector(".roulette");
 const scene = new THREE.Scene();
 const initPL1 = () => {
     document.getElementById("valuePL1").innerHTML = 0;
@@ -23,7 +25,7 @@ const camera = new THREE.PerspectiveCamera(
     500
 );
 
-// Initialise les dimensions suivant la taille de l'écran
+// Initializes the dimensions according to the screen size
 window.addEventListener("resize", onResize, false);
 
 function onResize() {
@@ -31,23 +33,33 @@ function onResize() {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
-// Initialise les dimensions suivant la taille de l'écran
+// Initializes the dimensions according to the screen size
+
+const x_500 = window.matchMedia("(min-width: 500px)");
+
+function mediaQuery_Dice_500(x) {
+    if (x.matches) {
+        camera.position.set(0, 5, 3.5);
+    } else {
+        camera.position.set(0, 7, 3.5);
+    }
+}
+x_500.addListener(mediaQuery_Dice_500);
 
 function init() {
-    // scene.background = new THREE.Color("black");
+    // Position of the camera at the beginning
+    mediaQuery_Dice_500(x_500); // Fonction d'écoute d'appel au moment de l'exécution
+    // camera.position.set(0, 5, 3.5);
+    // Position of the camera at the beginning
 
-    // Position de la caméra au commencement
-    camera.position.set(0, 5, 3.5);
-    // Position de la caméra au commencement
-
-    // Initialiser l'objet au centre de la scène en absolu
+    // Initialize the object in the center of the scene in absolute
     camera.lookAt(0, 0, 0);
     scene.fog = new THREE.Fog(0x000000, 0.08);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    // Initialiser l'objet au centre de la scène en absolu
+    // Initialize the object in the center of the scene in absolute
 }
 
-// Mise en place des lumières pour le dé
+// Setting up the lights for the dice
 let light, light1, light2, light3, light4, light5;
 
 function setLight() {
@@ -72,15 +84,15 @@ function setLight() {
 
     // scene.add(hl, hl1, hl2, hl3, hl4);
 }
-// Mise en place des lumières pour le dé
+// Setting up the lights for the dice
 
-// GUI pour contrôler les objets et avoir la reference position source
+// GUI to check the objects and have the source position reference
 // const gui = new dat.GUI();
-// GUI pour contrôler les objets et avoir la reference position source
+// GUI to check the objects and have the source position reference
 
-// GSAP Contrôleur d'animation
+// GSAP Animation controller
 // let tl = gsap.timeline({ paused: true });
-// GSAP Contrôleur d'animation
+// GSAP Animation controller
 
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
@@ -107,10 +119,11 @@ function onPointerMove(event) {
     }
 }
 
+let plateauMesh;
 let Mesh;
 
 function loadGLTF() {
-    //  Chargement de l'objet  plateau, et de mis a l'échelle
+    // Loading the tray object and scaling
     const plateau = new THREE.GLTFLoader();
     plateau.load("model-3d/plateau.gltf", (gltf1) => {
         plateauMesh = gltf1.scene;
@@ -119,16 +132,16 @@ function loadGLTF() {
         plateauMesh.rotation.x = -0.3;
         scene.add(plateauMesh);
     });
-    // Chargement de l'objet  plateau, et de mis a l'échelle
+    // Loading the tray object and scaling
 
-    //   Chargement de l'objet  dé, et de mis a l'échelle
+    // Loading the dice object and scaling
     const dice = new THREE.GLTFLoader();
     dice.load("model-3d/dice.glb", (gltf) => {
         Mesh = gltf.scene;
         Mesh.scale.set(0.5, 0.5, 0.5);
 
         scene.add(Mesh);
-        // Chargement de l'objet  dé, et de mis a l'échelle
+        // Loading the dice object and scaling
 
         // GUI pour contrôler les objets et avoir la reference position source
         // gui.add(Mesh.rotation, "x").min(0).max(9);
@@ -153,6 +166,9 @@ function loadGLTF() {
 // numéro 4: l'armement        - number 4: the armament
 // numéro 5: le relâchement    - number 5: the release
 // numéro 6: le roulement      - number 6: the roller
+// numéro 7: le son du gagnant - number 7: the sound of the winner
+// numéro 8: Whoosh            - number 8: Whoosh
+// numéro 9: bouton clic       - number 9: button click
 
 class Sound {
     constructor() {
@@ -193,9 +209,9 @@ class Sound {
     }
 }
 
-// // Instancier le son
-//  const sound = new Sound();
-// // Instancier le son
+// Instantiate the sound
+// const sound = new Sound();
+// Instantiate the sound
 
 // playlist
 // numéro 0: le lancer de dé   - number 0: the roll of dice
@@ -205,6 +221,9 @@ class Sound {
 // numéro 4: l'armement        - number 4: the armament
 // numéro 5: le relâchement    - number 5: the release
 // numéro 6: le roulement      - number 6: the roller
+// numéro 7: le son du gagnant - number 7: the sound of the winner
+// numéro 8: Whoosh            - number 8: Whoosh
+// numéro 9: bouton clic       - number 9: button click
 
 // sound effects of the dice (number, time * 3)
 // example of code for sound "sound.sound(0, 950, 1, 2100, 2, 3300)"
@@ -295,34 +314,32 @@ class StyleCss {
 
 // -----------Class Creation Section for Javascript-----------
 
-// Action cliquer sur le dé
+// Action click on the dice
 window.addEventListener("click", onPointerMove);
-// Action cliquer sur le dé
+// Action click on the dice
 
-// ***************Animation du dé***************
-
-// *******Déclaration des variables*******
+// *******variable declaration*******
 initPL1();
 initPL2();
 let number = [0];
 let totalNumberPl1 = 0;
 let totalNumberPl2 = 0;
-// *******Déclaration des variables*******
+// *******variable declaration*******
 
 const AnimationOfDiceForPlayer = () => {
-    // fonction aléatoire
+    // random function
     const randomY = gsap.utils.random([450, 540, 630, 720, 810, 900, 990, 1080]);
     const randomX = gsap.utils.random([
         90, 180, 270, 360, 1170, 1260, 1350, 1440,
     ]);
-    // fonction aléatoire
+    // random function
 
-    // Convertir degrés en radians
+    // Convert degrees to radians
     const degY = (randomY * Math.PI) / 180.0;
     const degX = (randomX * Math.PI) / 180.0;
-    // Convertir degrés en radians
+    // Convert degrees to radians
 
-    // Animation du dé
+    // dice animation
     gsap.to(Mesh.rotation, { y: degY, x: degX, duration: 2 });
     gsap.to(Mesh.position, {
         duration: 2,
@@ -337,16 +354,16 @@ const AnimationOfDiceForPlayer = () => {
         ease: "power4.out",
         y: 0,
     });
-    // Animation du dé
+    // dice animation
 
-    // Contrôler la valeur x et y du dé
+    // Check the x and y value of the dice
     // console.log(`degré Y ${randomY}`);
     // console.log(`degré X ${randomX}`);
-    // Contrôler la valeur x et y du dé
+    // Check the x and y value of the dice
 
-    // Instancier le son
+    // Instantiate the sound
     const sound = new Sound();
-    // Instancier le son
+    // Instantiate the sound
 
     // ***************return the value of the dice, with the x and y axes***************
     if (
@@ -455,12 +472,12 @@ const AnimationOfDiceForPlayer = () => {
         setTimeout(() => {
             valuePL1.innerText = number.reduce(addsUpPoints);
             switchPlayer();
-        }, 1600);
+        }, 2500);
     } else if (switched == 2) {
         setTimeout(() => {
             valuePL2.innerText = number.reduce(addsUpPoints);
             switchPlayer();
-        }, 1600);
+        }, 2500);
     }
 };
 
@@ -475,58 +492,189 @@ function addsUpPoints(total, num) {
     }
 }
 
-// ***************Animation du dé***************
+// ***************dice animation 3D (THREE.JS)***************
 const animate = () => {
     requestAnimationFrame(animate);
-
     renderer.render(scene, camera);
 };
-// ***************Animation du dé***************
-
-//************************************************************
-//////// PLAYERS ARRAY ////////
-let player1 = {
-    name: "",
-    globalScore: 0,
-    roundScore: 0,
-};
-
-let player2 = {
-    name: "",
-    globalScore: 0,
-    roundScore: 0,
-};
-//////// PLAYERS ARRAY ////////
+// ***************dice animation 3D (THREE.JS)***************
 
 //************************************************************
 
-// ***************animation en 2 dimensions***************
+// ***************2D animation***************
 
-function focusPL1() {
-    // Instancier le StyleCss
+//////// WINNER ////////
+function winner() {
+    if (totalPl1 >= 100) {
+        number = 100;
+        setTimeout(() => {
+            animationWinnerOn();
+        }, 4000);
+    } else if (totalPl2 >= 100) {
+        number = 100;
+
+        setTimeout(() => {
+            animationWinnerOn();
+        }, 4000);
+    }
+}
+
+let name_winner;
+
+function animation_Name_Winner() {
+    if (totalPl1 >= 100) {
+        document.querySelector(
+            ".name_winner"
+        ).innerText = `WINNER  ${namePlayer1.toUpperCase()}  WINNER`;
+    } else if (totalPl2 >= 100) {
+        document.querySelector(
+            ".name_winner"
+        ).innerText = `WINNER  ${namePlayer2.toUpperCase()}  WINNER`;
+    }
+}
+
+function stopFocus() {
+    if (totalPl1 >= 100 || totalPl2 >= 100) {
+        null;
+    } else if (totalPl1 < 100 && switched == 2) {
+        focusPL2();
+    } else if (totalPl2 < 100 && switched == 1) {
+        focusPL1();
+    }
+}
+
+function animationWinnerOff() {
+    function visible() {
+        // Instantiate the Style
+        const css1 = new StyleCss();
+        const css2 = new StyleCss();
+        // Instantiate the Style
+
+        css1.css(
+            ".hidden1",
+            "opacity: 0;transition: 0s;visibility: visible",
+            0,
+            "opacity: 1;transition: 2s",
+            200
+        );
+        css2.css(
+            ".hidden2",
+            "opacity: 0;transition: 0s;visibility: visible",
+            0,
+            "opacity: 1;transition: 2s",
+            200
+        );
+    }
+    visible();
+
+    // Instantiate the StyleCss
+    const css1 = new StyleCss();
+    const css3 = new StyleCss();
+    // Instantiate the StyleCss
+
+    css3.css(".name_winner", "opacity: 0;transition: 2s", 200);
+    css1.css(
+        ".boxRoulette",
+        "transform: scale(1) translate(0vw, 0vh);transition:all 1s",
+        200
+    );
+}
+
+function animationWinnerOn() {
+    function hidden() {
+        // Instantiate the Style
+        const css1 = new StyleCss();
+        const css2 = new StyleCss();
+        // Instantiate the Style
+
+        css1.css(
+            ".hidden1",
+            "opacity: 0;transition: 2s",
+            0,
+            "opacity: 0;transition: 0s;visibility: hidden",
+            2000
+        );
+        css2.css(
+            ".hidden2",
+            "opacity: 0;transition: 2s",
+            0,
+            "opacity: 0;transition: 0s;visibility: hidden",
+            2000
+        );
+    }
+    hidden();
+    animation_Name_Winner();
+    // Instantiate the sound
+    const sound = new Sound();
+    // Instantiate the sound
+
+    sound.sound(7, 0);
+
+    // Instantiate the StyleCss
+    const css1 = new StyleCss();
+    const css2 = new StyleCss();
+    const css3 = new StyleCss();
+    // Instantiate the StyleCss
+
+    css1.css(
+        ".boxRoulette",
+        "transform: scale(1.3) translate(39.5vw, -20vh);transition:all 1s",
+        2200
+    );
+    css2.css(
+        ".centre_roulette",
+        "transform: rotate(10turn); transition: transform 10s cubic-bezier(0,-0.02,.04,1);",
+        3300,
+        "transform: rotate(7turn); transition: transform 10s cubic-bezier(.35,.37,0,1.01);",
+        15300,
+        "transform: rotate(9turn); transition: transform 20s cubic-bezier(.35,.37,0,1.01);",
+        28300
+    );
+
+    css3.css(".name_winner", "opacity: 1;transition: 2s", 2200);
+}
+//////// WINNER ////////
+
+//************************************************************
+
+// ***************2D animation***************
+
+const x_1000 = window.matchMedia("(min-width: 1000px)");
+
+function mediaQuery_Focus_1000() {
+    if (x_1000.matches && switched == 2) {
+        return "transform: translateX(55.5vw) scale(0.8);border-radius: 2em;transition: all 2s;";
+    } else if (x_1000.matches && switched == 1) {
+        return "transform: translateX(0vw) scale(0.8);border-radius: 2em;transition: all 2s;";
+    } else if (!x_1000.match && switched == 2) {
+        return "transform: translateX(55.5vw);border-radius: 2em;transition: all 2s;";
+    } else if (!x_1000.match && switched == 1) {
+        return "transform: translateX(0vw);border-radius: 2em;transition: all 2s;";
+    }
+}
+
+x_1000.addListener(mediaQuery_Focus_1000);
+
+const focusCss = () => {
+    // Instantiate the StyleCss
     const css = new StyleCss();
-    // Instancier le StyleCss
+    // Instantiate the StyleCss
 
     css.css(
         "#focusPlay",
         "transform: translateX(33vw) scale(1.2);border-radius: 2em;transition: 2s",
         500,
-        "transform: translateX(0vw);border-radius: 7em;transition: all 2s;",
+        mediaQuery_Focus_1000(x_1000),
         1500
     );
+};
+
+function focusPL1() {
+    focusCss();
 }
 
 function focusPL2() {
-    // Instancier le StyleCss
-    const css = new StyleCss();
-    // Instancier le StyleCss
-    css.css(
-        "#focusPlay",
-        "transform: translateX(33vw) scale(1.2);border-radius: 2em; transition: 2s",
-        500,
-        "transform: translateX(65.6vw);border-radius: 7em;transition: all 2s;",
-        1500
-    );
+    focusCss();
 }
 
 function loadImageNumber(value) {
@@ -548,53 +696,33 @@ function switchPlayer() {
             if (number == 0 && switched == 1) {
                 switched = 2;
                 focusPL2();
+                stopFocus();
             }
             break;
         default:
             if (number == 0 && switched == 2) {
                 switched = 1;
                 focusPL1();
+                stopFocus();
             }
     }
 }
-// roulette animation
 
-let moveRoulette = document.querySelector(".centre_roulette");
+// ***************2D animation***************
 
-moveRoulette.addEventListener("click", roulette_animation);
-
-function roulette_animation() {
-    css1 = new StyleCss();
-    css2 = new StyleCss();
-
-    css1.css(
-        ".roulette",
-        "transform: scale(1.5) translate(30vw, -25vh);transition:all 1s",
-        200
-    );
-    css2.css(
-        ".centre_roulette",
-        "transform: scale(1.5) translate(30vw, -25vh);transition:all 1s",
-        200,
-        "transform: scale(1.5) translate(30vw, -25vh) rotate(10turn); transition: transform 10s cubic-bezier(0,-0.02,.04,1);",
-        1300
-    );
-}
-// roulette animation
-
-//******La fonction numberPl1 engendre l'animation et appelle les chiffres du résultat*****
+//******The numberPl1 function generates the animation and calls the result figures*****
 const numberPl1 = document.getElementById("numberPl1");
 const startPl1 = document.getElementById("startPl1");
 let totalPl1;
 
 numberPl1.addEventListener("click", () => {
     if (switched == 2 || number == 0) {
-        console.log(null);
+        // console.log(null);
         return null;
     } else {
-        // Instancier le son
+        // Instantiate the sound
         const sound = new Sound();
-        // Instancier le son
+        // Instantiate the sound
 
         // numéro 4: l'armement        - number 4: the armament
         // numéro 5: le relâchement    - number 5: the release
@@ -604,17 +732,20 @@ numberPl1.addEventListener("click", () => {
         // cr.to(".carrer", { rotation: 27, x: 100, duration: 1 });
         totalPl1 = totalNumberPl1 + number.reduce(addsUpPoints);
         loadImageNumber(totalPl1);
+        winner();
 
-        // animation du gif Jackpot en 3D crée avec blender
+        // 3D Jackpot gif animation created with the blender software
         startPl1.src = "model-3d/JackpotGif_3D_600dpi-min.gif";
-        // animation du gif Jackpot en 3D crée avec blender
+        // 3D Jackpot gif animation created with the blender software
 
         setTimeout(() => {
             numberPl1.setAttribute("style", "z-index: 0;");
+            // console.log(number);
         }, 1450);
 
         setTimeout(() => {
             numberPl1.src = `image/Image ${number}.png`;
+            // console.log(number);
         }, 1550);
 
         setTimeout(() => {
@@ -623,14 +754,14 @@ numberPl1.addEventListener("click", () => {
             number = [0];
             switched = 2;
             initPL1();
-            focusPL2();
+            stopFocus();
             animate();
         }, 3500);
     }
 });
-//******La fonction numberPl1 engendre l'animation et appelle les chiffres du résultat*****
+//******The numberPl1 function generates the animation and calls the result figures*****
 
-//******La fonction numberPl2 engendre l'animation et appelle les chiffres du résultat****const
+//******The numberPl2 function generates the animation and calls the result figures****
 
 let totalPl2;
 
@@ -639,9 +770,9 @@ numberPl2.addEventListener("click", () => {
         console.log(null);
         return null;
     } else {
-        // Instancier le son
+        // Instantiate the sound
         const sound = new Sound();
-        // Instancier le son
+        // Instantiate the sound
 
         // numéro 4: l'armement        - number 4: the armament
         // numéro 5: le relâchement    - number 5: the release
@@ -650,10 +781,10 @@ numberPl2.addEventListener("click", () => {
 
         totalPl2 = totalNumberPl2 + number.reduce(addsUpPoints);
         loadImageNumber(totalPl2);
-
-        // animation du gif Jackpot en 3D crée avec blender
+        winner();
+        // 3D Jackpot gif animation created with the blender software
         startPl2.src = "model-3d/JackpotGif_3D_600dpi-min.gif";
-        // animation du gif Jackpot en 3D crée avec blender
+        // 3D Jackpot gif animation created with the blender software
 
         setTimeout(() => {
             numberPl2.setAttribute("style", "z-index: 0;");
@@ -669,16 +800,173 @@ numberPl2.addEventListener("click", () => {
             number = [0];
             switched = 1;
             initPL2();
-            focusPL1();
+            stopFocus();
             animate();
         }, 3500);
     }
 });
-//******La fonction numberPl2 engendre l'animation et appelle les chiffres du résultat*****
+//******The numberPl2 function generates the animation and calls the result figures*****
 
-// ***************animation en 2 dimensions***************
+// Playing the game rules
 
+function_rule_modal();
+document.querySelector("#rule").addEventListener("click", () => {
+    // Instantiate the sound
+    const sound1 = new Sound();
+    // Instantiate the sound
+    sound1.sound(8, 800);
+
+    const css1 = new StyleCss();
+    const css2 = new StyleCss();
+
+    css1.css(
+        ".fixed_rule",
+        "visibility: visible;transform: translateY(100vh);transition: transform 1.8s;",
+        500
+    );
+    css2.css(".rule-game-modal", "visibility: visible;", 10);
+
+    window.removeEventListener("click", onPointerMove);
+});
+// Playing the game rules
+
+// end of playing the game rule
+document.querySelector(".btn").addEventListener("click", () => {
+    // Instantiate the sound
+    const sound2 = new Sound();
+    // Instantiate the sound
+    sound2.sound(9, 0);
+
+    const css3 = new StyleCss();
+    const css4 = new StyleCss();
+
+    css3.css(
+        ".fixed_rule",
+        "visibility: visible;transform: translateY(-100vh);transition: transform 1.8s;",
+        500,
+        "visibility: hidden;",
+        2000
+    );
+    css4.css(".rule-game-modal", "visibility: hidden;", 2500);
+    window.addEventListener("click", onPointerMove);
+});
+// end of playing the game rule
+
+// initialize player names
+let name1, name2, namePlayer1, namePlayer2;
+
+name_play_start();
+const start = document.querySelector(".button");
+start.addEventListener("click", (event) => {
+    namePlayer1 = document.querySelector("#player_name1").value;
+    namePlayer2 = document.querySelector("#player_name2").value;
+    name1 = document.querySelector(".name1");
+    name2 = document.querySelector(".name2");
+
+    const css = new StyleCss();
+    if (namePlayer1.length > 10 || namePlayer2.length > 10) {
+        document.querySelector(".alert1").innerText = "10 lettres maximum !";
+
+        css.css(
+            ".alert1",
+            "opacity: 1;transition: opacity 2s;color: red;font-size: max(2vw, 20px);",
+            100,
+            "opacity: 0;transition: opacity 2s;color: red;font-size: max(2vw, 20px);",
+            3000
+        );
+
+        setTimeout(() => {
+            document.querySelector(".alert1").innerText = "";
+        }, 3500);
+
+        event.preventDefault();
+    } else if (namePlayer1.length == 0 && namePlayer2.length == 0) {
+        namePlayer1 = `PLAYER 1`;
+        namePlayer2 = `PLAYER 2`;
+        name1.innerText = namePlayer1;
+        name2.innerText = namePlayer2;
+        playStart2();
+    } else if (namePlayer1.length == 0 && namePlayer2.length >= 1) {
+        name2.innerText = namePlayer2.toUpperCase();
+        namePlayer1 = `PLAYER 1`;
+        name1.innerText = namePlayer1;
+        playStart2();
+    } else if (namePlayer1.length >= 1 && namePlayer2.length == 0) {
+        name1.innerText = namePlayer1.toUpperCase();
+        namePlayer2 = `PLAYER 2`;
+        name2.innerText = namePlayer2;
+        playStart2();
+    } else {
+        name1.innerText = namePlayer1.toUpperCase();
+        name2.innerText = namePlayer2.toUpperCase();
+        playStart2();
+    }
+});
+
+function playStart1() {
+    // Instantiate the sound
+    const sound = new Sound();
+    // Instantiate the sound
+    sound.sound(8, 1400);
+
+    const css1 = new StyleCss();
+    const css2 = new StyleCss();
+
+    css1.css(".new-game-modal", "visibility: visible;", 10);
+    css2.css(
+        ".fixed",
+        "visibility: visible;transform: translateY(15vh);transition: transform 1.8s;",
+        500
+    );
+    window.removeEventListener("click", onPointerMove);
+}
+
+function playStart2() {
+    // Instantiate the sound
+    const sound = new Sound();
+    // Instantiate the sound
+    sound.sound(3, 0);
+
+    const css1 = new StyleCss();
+    const css2 = new StyleCss();
+    const css3 = new StyleCss();
+
+    css1.css(
+        ".fixed",
+        "visibility: visible;transform: translateY(-100vh);transition: transform 1.8s;",
+        500,
+        "visibility: hidden;transform: translateY(-100vh);",
+        2000
+    );
+    css2.css(".new-game-modal", "visibility: hidden;", 2000);
+    css3.css("#canvas", "opacity: 1;transition: opacity 6s;", 800);
+    setTimeout(() => {
+        animate();
+        window.addEventListener("click", onPointerMove);
+    }, 1000);
+}
+// initialize player names
+
+// REPLAY---------------------------------
+document.querySelector("#replay").addEventListener("click", () => {
+    soundToon[7].pause();
+    soundToon[7].currentTime = 0;
+    animationWinnerOff();
+    initPL1();
+    initPL2();
+    number = [0];
+    totalNumberPl1 = 0;
+    totalNumberPl2 = 0;
+    name1.innerText = "";
+    name2.innerText = "";
+    numberPl1.src = `image/Image 000.png`;
+    numberPl2.src = `image/Image 000.png`;
+    switched = 1;
+    focusPL1();
+    playStart1();
+});
+
+playStart1();
 init();
 setLight();
 loadGLTF();
-animate();
