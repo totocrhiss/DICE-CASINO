@@ -1,0 +1,194 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.5.17",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "extras" : {
+                "skinify" : {
+                    "connect_mesh" : 0,
+                    "connect_parents" : 0,
+                    "generate_all" : 0,
+                    "thickness" : 0.800000011920929,
+                    "finger_thickness" : 0.25,
+                    "apply_mod" : 1,
+                    "parent_armature" : 1,
+                    "sub_level" : 1
+                },
+                "namedlayers" : {
+                    "layers" : [
+                        {
+                            "name" : "Layer01"
+                        },
+                        {
+                            "name" : "Layer02"
+                        },
+                        {
+                            "name" : "Layer03"
+                        },
+                        {
+                            "name" : "Layer04"
+                        },
+                        {
+                            "name" : "Layer05"
+                        },
+                        {
+                            "name" : "Layer06"
+                        },
+                        {
+                            "name" : "Layer07"
+                        },
+                        {
+                            "name" : "Layer08"
+                        },
+                        {
+                            "name" : "Layer09"
+                        },
+                        {
+                            "name" : "Layer10"
+                        },
+                        {
+                            "name" : "Layer11"
+                        },
+                        {
+                            "name" : "Layer12"
+                        },
+                        {
+                            "name" : "Layer13"
+                        },
+                        {
+                            "name" : "Layer14"
+                        },
+                        {
+                            "name" : "Layer15"
+                        },
+                        {
+                            "name" : "Layer16"
+                        },
+                        {
+                            "name" : "Layer17"
+                        },
+                        {
+                            "name" : "Layer18"
+                        },
+                        {
+                            "name" : "Layer19"
+                        },
+                        {
+                            "name" : "Layer20"
+                        }
+                    ],
+                    "use_init" : 0
+                }
+            },
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "extras" : {},
+            "mesh" : 0,
+            "name" : "plateau",
+            "translation" : [
+                0,
+                -1.1000001430511475,
+                0
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "extras" : {
+                "THREE_blending_type" : 4,
+                "THREE_double_sided" : 0,
+                "THREE_depth_test" : 1,
+                "THREE_depth_write" : 1
+            },
+            "name" : "plateau.005",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    5.044018180910825e-08,
+                    0,
+                    0.5,
+                    1
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Torus.004",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1
+                    },
+                    "indices" : 2,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 3026,
+            "max" : [
+                8.909500122070312,
+                1.1940795183181763,
+                8.909500122070312
+            ],
+            "min" : [
+                -8.909500122070312,
+                -1.1940795183181763,
+                -8.909500122070312
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 3026,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5123,
+            "count" : 18144,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 36312,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 36312,
+            "byteOffset" : 36312
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 36288,
+            "byteOffset" : 72624
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 108912,
+            "uri" : "plateau.bin"
+        }
+    ]
+}

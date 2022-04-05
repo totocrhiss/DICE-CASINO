@@ -5,20 +5,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My first three.js app</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Toto dice games</title>
     <link rel="stylesheet" href="style.css">
 
 </head>
+<div id="player1">
 
-<button id="bouton">PLAY</button>
-<div class="carrer carrer3"></div>
+</div>
+<div id="player2"></div>
+<!-- <button id="bouton">ROLL DICE</button> -->
+<!-- <div class="carrer carrer3"></div> -->
 
 <div class="box">
     <canvas id="canvas"></canvas>
 </div>
 
+
+<audio class="audio" src="resources\sound\Dice-roll-MP3.mp3"></audio>
+<audio class="audio" src="resources\sound\TOONBoingCartoon-MP3.mp3"></audio>
+<audio class="audio" src="resources\sound\poin-poin-poiiiiiiin-MP3.mp3"></audio>
+<audio class="audio" src="resources\sound\switch-players-MP3.mp3"></audio>
+
+
+<source class="myAudio" src="resources\sound\Dice-roll-MP3.mp3" type="audio/ogg"> -->
+
 <!-- Three.js library -->
-<script src="resources\ThreeJs\three.js"></script>
+<script src="resources\ThreeJs\three.min.js"></script>
 <!-- GLTFLoader.js source -->
 <script src="resources\ThreeJs\GLTFLoader.js"></script>
 <!-- GUI pour contrôler les objets et avoir la reference position source -->
@@ -26,7 +39,6 @@
 <!-- GSAP Animation control -->
 <script src="resources\JqueryJs\gsap.min.js"></script>
 <script src="resources\JqueryJs\CustomEase.min.js"></script>
-
 <!-- programme Jquery -->
 <script src="resources\JqueryJs\Jquery.min.js"></script>
 <!-- programme Jquery.Velocity -->
