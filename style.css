@@ -134,10 +134,10 @@ p {
     background-repeat: no-repeat;
 }
 
-
-}
 #cumule1 {}
+
 #cumule2 {}
+
 #player2 {
     right: 2em;
     background: #e2df2b;
@@ -146,12 +146,14 @@ p {
     /* width: 30%;
     height: 50%;  */
 }
+
 .btn {
     position: absolute;
     top: 20%;
     /* border: black solid 0.2em;
     background-color: #e22bd3; */
 }
+
 #bouton {
     border-radius: 1em;
     padding: 0.5em;
@@ -160,10 +162,12 @@ p {
     color: rgb(0, 0, 161);
 }
 
+
 /* #bouton:hover {
     background-color: rgb(255, 196, 107);
     transition: 0.8s;
 } */
+
 .carrer {
     position: absolute;
     top: 5em;
@@ -173,6 +177,7 @@ p {
     height: 5em;
     visibility: hidden;
 }
+
 .carrer2 {
     position: absolute;
     top: 5em;

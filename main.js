@@ -1,6 +1,6 @@
-let domCanvas = document.querySelector("#canvas");
-let bouton = document.querySelector("#bouton");
-let soundToon = document.querySelectorAll(".audio");
+const domCanvas = document.querySelector("#canvas");
+const bouton = document.querySelector("#bouton");
+const soundToon = document.querySelectorAll(".audio");
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer({
     antialias: true,
@@ -104,7 +104,7 @@ let Mesh;
 
 function loadGLTF() {
     //  Chargement de l'objet  plateau, et de mis a l'échelle
-    let plateau = new THREE.GLTFLoader();
+    const plateau = new THREE.GLTFLoader();
     plateau.load("model-3d/plateau.gltf", (gltf1) => {
         plateauMesh = gltf1.scene;
         plateauMesh.scale.set(0.3, 0.3, 0.3);
@@ -115,8 +115,8 @@ function loadGLTF() {
         // Chargement de l'objet  plateau, et de mis a l'échelle
     });
     //   Chargement de l'objet  dé, et de mis a l'échelle
-    let dice = new THREE.GLTFLoader();
-    dice.load("model-3d/dice.gltf", (gltf) => {
+    const dice = new THREE.GLTFLoader();
+    dice.load("model-3d/dice.glb", (gltf) => {
         Mesh = gltf.scene;
         Mesh.scale.set(0.5, 0.5, 0.5);
 
@@ -215,15 +215,17 @@ window.addEventListener("click", onPointerMove);
 // Action cliquer sur le dé
 
 // ***************Animation du dé pour le joueur 1***************
-let AnimationOfDiceForPlayer_1 = () => {
+const AnimationOfDiceForPlayer_1 = () => {
     // fonction aléatoire
-    let randomY = gsap.utils.random([450, 540, 630, 720, 810, 900, 990, 1080]);
-    let randomX = gsap.utils.random([90, 180, 270, 360, 1170, 1260, 1350, 1440]);
+    const randomY = gsap.utils.random([450, 540, 630, 720, 810, 900, 990, 1080]);
+    const randomX = gsap.utils.random([
+        90, 180, 270, 360, 1170, 1260, 1350, 1440,
+    ]);
     // fonction aléatoire
 
     // Convertir degrés en radians
-    let degY = (randomY * Math.PI) / 180.0;
-    let degX = (randomX * Math.PI) / 180.0;
+    const degY = (randomY * Math.PI) / 180.0;
+    const degX = (randomX * Math.PI) / 180.0;
     // Convertir degrés en radians
 
     // Animation du dé
@@ -244,12 +246,12 @@ let AnimationOfDiceForPlayer_1 = () => {
     // Animation du dé
 
     // Contrôler la valeur x et y du dé
-    console.log(`degré Y ${randomY}`);
-    console.log(`degré X ${randomX}`);
+    // console.log(`degré Y ${randomY}`);
+    // console.log(`degré X ${randomX}`);
     // Contrôler la valeur x et y du dé
 
     // Instancier le son
-    let sound = new Sound();
+    const sound = new Sound();
     // Instancier le son
 
     // ***************retourner la valeur du dé, avec les  axes x et y***************
@@ -266,7 +268,7 @@ let AnimationOfDiceForPlayer_1 = () => {
     ) {
         sound.sound(0, 950, 1, 2100, 2, 2700);
 
-        console.log("numéro °= 1");
+        // console.log("numéro °= 1");
     } else if (
         (randomY === 540 && randomX === 1350) ||
         (randomY === 540 && randomX === 270) ||
@@ -278,7 +280,7 @@ let AnimationOfDiceForPlayer_1 = () => {
         (randomY === 1080 && randomX === 90)
     ) {
         sound.sound(0, 950, 1, 2100);
-        console.log("numéro °= 2");
+        // console.log("numéro °= 2");
     } else if (
         (randomY === 450 && randomX === 1350) ||
         (randomY === 450 && randomX === 270) ||
@@ -290,7 +292,7 @@ let AnimationOfDiceForPlayer_1 = () => {
         (randomY === 990 && randomX === 90)
     ) {
         sound.sound(0, 950, 1, 2100);
-        console.log("numéro °= 3");
+        // console.log("numéro °= 3");
     } else if (
         (randomY === 450 && randomX === 1170) ||
         (randomY === 450 && randomX === 90) ||
@@ -302,7 +304,7 @@ let AnimationOfDiceForPlayer_1 = () => {
         (randomY === 990 && randomX === 270)
     ) {
         sound.sound(0, 950, 1, 2100);
-        console.log("numéro °= 4");
+        // console.log("numéro °= 4");
     } else if (
         (randomY === 540 && randomX === 1170) ||
         (randomY === 540 && randomX === 90) ||
@@ -314,7 +316,7 @@ let AnimationOfDiceForPlayer_1 = () => {
         (randomY === 1080 && randomX === 270)
     ) {
         sound.sound(0, 950, 1, 2100);
-        console.log("numéro °= 5");
+        // console.log("numéro °= 5");
     } else if (
         (randomY === 450 ||
             randomY === 540 ||
@@ -327,9 +329,9 @@ let AnimationOfDiceForPlayer_1 = () => {
         (randomX === 180 || randomX === 1260)
     ) {
         sound.sound(0, 950, 1, 2100);
-        console.log("numéro °= 6");
+        // console.log("numéro °= 6");
     } else {
-        console.log("non défini");
+        // console.log("non défini");
     }
     // ***************retourner la valeur du dé, avec les  axes x et y***************
 };
@@ -342,11 +344,11 @@ const animate = () => {
     renderer.render(scene, camera);
 };
 
-// ***************animation en 2 dimensions GSAP***************
-let cr = gsap.timeline();
+// ***************animation en 2 dimensions***************
+// let cr = gsap.timeline();
 
-let numberPl1 = document.getElementById("numberPl1");
-let startPl1 = document.getElementById("startPl1");
+const numberPl1 = document.getElementById("numberPl1");
+const startPl1 = document.getElementById("startPl1");
 let number = 0;
 
 function loadImageNumber(value) {
@@ -359,24 +361,24 @@ function loadImageNumber(value) {
     }
 }
 
-// console.log(loadImageNumber(45));
+// console.log(loadImageNumber(1));
 
 //******La fonction numberPl1 engendre l'animation et appelle les chiffres du résultat*****
 numberPl1.addEventListener("click", () => {
-    let sound1 = new Sound();
-    let sound2 = new Sound();
+    // recherche un chiffre aléatoire de 0 à 100
+    loadImageNumber(Math.floor(Math.random() * 101));
+    // recherche un chiffre aléatoire de 0 à 100
+
+    const sound1 = new Sound();
+    const sound2 = new Sound();
 
     // cr.to(".carrer", { rotation: 27, x: 100, duration: 1 });
-
-    // // recherche un chiffre aléatoire de 0 à 100
-    // loadImageNumber(Math.floor(Math.random() * 101));
-    // // recherche un chiffre aléatoire de 0 à 100
 
     // numéro 4: l'armement        - number 4: the armament
     // numéro 5: le relâchement    - number 5: the release
     // numéro 6: le roulement      - number 6: the roller
 
-    startPl1.src = "model-3d/Animation chiffres.webp";
+    startPl1.src = "model-3d/AnimationChiffres.webp";
     sound1.sound(4, 170, 5, 1450);
     sound2.sound(6, 4000);
     // console.log(sound2);
@@ -387,10 +389,11 @@ numberPl1.addEventListener("click", () => {
 
     setTimeout(() => {
         numberPl1.src = `image/Image ${number}.png`;
-        console.log(numberPl1);
-        console.log(number);
+        // console.log(numberPl1);
+        // console.log(number);
         // numberPl1.src = "image/Image 001.png";
         numberPl1.setAttribute("style", "z-index: 2;");
+
         // animFix.setAttribute("src", "image/Image 005.png");
         // animFix.setAttribute("style", "background-color:red;");
         //  total1.style.backgroundImage = "url('')";
@@ -399,7 +402,7 @@ numberPl1.addEventListener("click", () => {
 });
 //******La fonction numberPl1 engendre l'animation et appelle les chiffres du résultat*****
 
-// ***************animation en 2 dimensions GSAP***************
+// ***************animation en 2 dimensions***************
 
 init();
 setLight();

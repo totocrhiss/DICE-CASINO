@@ -1,13 +1,6 @@
 # DICE-CASINO
 
-Creation of the gif file for the jackpot animation.
+Javascript programming for synchronizing the jackpot animation with an addEventListener('click')
+and a random search function of the number displayed in the jackpot.
 
-The jackpot and animation were created with the BLENDER software.
-
-Export to PNG image from BLENDER.
-
-I create it in gif with the software ScreenToGif exported to webp.
-
-I start to position the elements in CSS with DOM manipulation in javascript.
-
-I create a function to recover the number in PNG file for the end of the gif animation.
+Added sound effect for jackpot animation.

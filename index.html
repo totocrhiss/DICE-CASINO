@@ -5,69 +5,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="flavicon.png" type="image/x-icon">
     <title>Toto dice games</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
-<div class="box">
-    <div class="header"></div>
-    <div id="player1">
-        <div id="total1">
-            <p>PAZMANY CHRISTIAN</p>
-            <img id="numberPl1" src="image\Image 000.png">
-            <img id="startPl1" src="image\Image.png">
+
+<body>
+
+    <div class="box">
+        <div class="header"></div>
+        <div id="player1">
+            <div id="total1">
+                <p>PAZMANY CHRISTIAN</p>
+                <img id="numberPl1" src="image\Image 000.png">
+                <img id="startPl1" src="image\Image.png">
+            </div>
+
+            <div id="cumule1"></div>
+
+        </div>
+        <div id="player2">
+            <div id="total2"><img id="animFix" src=""></div>
+            <div id="cumule2"></div>
         </div>
 
-        <div id="cumule1"></div>
+        <div class="btn">
+            <button id="bouton">ROLL DICE</button>
+        </div>
+
+        <canvas id="canvas"></canvas>
+
 
     </div>
-    <div id="player2">
-        <div id="total2"><img id="animFix" src=""></div>
-        <div id="cumule2"></div>
-    </div>
-
-    <div class="btn">
-        <button id="bouton">ROLL DICE</button>
-    </div>
-
-    <canvas id="canvas"></canvas>
 
 
-</div>
+    <audio class="audio" src="sound\Dice-roll-MP3.mp3"></audio>
+    <audio class="audio" src="sound\TOONBoingCartoon-MP3.mp3"></audio>
+    <audio class="audio" src="sound\poin-poin-poiiiiiiin-MP3.mp3"></audio>
+    <audio class="audio" src="sound\switch-players-MP3.mp3"></audio>
+    <audio class="audio" src="sound\mechanismEngaged.mp3"></audio>
+    <audio class="audio" src="sound\mechanismRolling.mp3"></audio>
+    <audio class="audio" src="sound\mechanismLocks.mp3"></audio>
 
-
-<audio class="audio" src="resources\sound\Dice-roll-MP3.mp3"></audio>
-<audio class="audio" src="resources\sound\TOONBoingCartoon-MP3.mp3"></audio>
-<audio class="audio" src="resources\sound\poin-poin-poiiiiiiin-MP3.mp3"></audio>
-<audio class="audio" src="resources\sound\switch-players-MP3.mp3"></audio>
-<audio class="audio" src="resources\sound\mechanismEngaged.mp3"></audio>
-<audio class="audio" src="resources\sound\mechanismRolling.mp3"></audio>
-<audio class="audio" src="resources\sound\mechanismLocks.mp3"></audio>
-
-
-
-<source class="myAudio" src="resources\sound\Dice-roll-MP3.mp3" type="audio/ogg"> -->
-
-
-
-<!-- Three.js library -->
-<script src="resources\ThreeJs\three.min.js"></script>
-<!-- GLTFLoader.js source -->
-<script src="resources\ThreeJs\GLTFLoader.js"></script>
-<!-- GUI pour contrôler les objets et avoir la reference position source -->
-<script src="resources\Dat_control\dat.gui.min.js"></script>
-<!-- GSAP Animation control -->
-<script src="resources\JqueryJs\gsap.min.js"></script>
-<script src="resources\JqueryJs\CustomEase.min.js"></script>
-<!-- programme Jquery -->
-<script src="resources\JqueryJs\Jquery.min.js"></script>
-<!-- programme Jquery.Velocity -->
-<script src="resources\JqueryJs\velocity.min.js"></script>
-<!-- programme Jquery.Velocity.ui -->
-<script src="resources\JqueryJs\velocity.ui.min.js"></script>
-<!-- programme JavaScript -->
-<script src="main.js"></script>
+    <!-- Three.js library -->
+    <script src="ThreeJs\three.min.js"></script>
+    <!-- GLTFLoader.js source -->
+    <script src="ThreeJs\GLTFLoader.min.js"></script>
+    <!-- GSAP Animation control -->
+    <script src="ThreeJs\gsap.min.js"></script>
+    <!-- programme JavaScript -->
+    <script src="main.js"></script>
 
 </body>
 
