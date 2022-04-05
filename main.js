@@ -1,7 +1,16 @@
 const domCanvas = document.querySelector("#canvas");
 const bouton = document.querySelector("#bouton");
 const soundToon = document.querySelectorAll(".audio");
+const focusPlay = document.querySelector("#focusPlay");
 const scene = new THREE.Scene();
+const initPL1 = () => {
+    document.getElementById("valuePL1").innerHTML = 0;
+    document.getElementById("startPl1").src = "image/Image.png";
+};
+const initPL2 = () => {
+    document.getElementById("valuePL2").innerHTML = 0;
+    document.getElementById("startPl2").src = "image/Image.png";
+};
 const renderer = new THREE.WebGLRenderer({
     antialias: true,
     canvas: domCanvas,
@@ -92,12 +101,10 @@ function onPointerMove(event) {
     const intersects = raycaster.intersectObjects(scene.children);
 
     if (intersects.length === 1) {
-        AnimationOfDiceForPlayer_1();
+        AnimationOfDiceForPlayer();
     } else {
         null;
     }
-
-    // console.log(intersects.length);
 }
 
 let Mesh;
@@ -111,16 +118,15 @@ function loadGLTF() {
         plateauMesh.position.y = -10;
         plateauMesh.rotation.x = -0.3;
         scene.add(plateauMesh);
-
-        // Chargement de l'objet  plateau, et de mis a l'échelle
     });
+    // Chargement de l'objet  plateau, et de mis a l'échelle
+
     //   Chargement de l'objet  dé, et de mis a l'échelle
     const dice = new THREE.GLTFLoader();
     dice.load("model-3d/dice.glb", (gltf) => {
         Mesh = gltf.scene;
         Mesh.scale.set(0.5, 0.5, 0.5);
 
-        // Mesh.position.y = 0;
         scene.add(Mesh);
         // Chargement de l'objet  dé, et de mis a l'échelle
 
@@ -132,12 +138,7 @@ function loadGLTF() {
     });
 }
 
-// Action de cliquer sur le dé
-// bouton.addEventListener("click", () => {
-//     tl.play();
-
-//     AnimationOfDiceForPlayer_1();
-// });
+// -----------Class Creation Section for Javascript-----------
 
 // ***************sound effects of the dice***************
 
@@ -193,7 +194,7 @@ class Sound {
 }
 
 // // Instancier le son
-//  let sound = new Sound();
+//  const sound = new Sound();
 // // Instancier le son
 
 // playlist
@@ -210,12 +211,105 @@ class Sound {
 
 // ***************sound effects of the dice***************
 
+// to make Css styles with timing
+// const css = new StyleCss();
+// css.css("#valuePL1","color: red;font-size:8em;transition: all 2s;",2000,"color: blue;font-size:4em;transition: all 2s;",3000,"color: yellow;transition: all 2s;",4000);
+// to make Css styles with timing
+
+class StyleCss {
+    constructor() {
+        this.variable = "";
+        this.style1 = "";
+        this.time1 = 0;
+        this.style2 = "";
+        this.time2 = 0;
+        this.style3 = "";
+        this.time3 = 0;
+        this.style4 = "";
+        this.time4 = 0;
+        this.style5 = "";
+        this.time5 = 0;
+    }
+    css(
+        variable,
+        style1,
+        time1,
+        style2,
+        time2,
+        style3,
+        time3,
+        style4,
+        time4,
+        style5,
+        time5
+    ) {
+        this.variable += variable;
+        this.style1 += style1;
+        this.time1 += time1;
+        this.style2 += style2;
+        this.time2 += time2;
+        this.style3 += style3;
+        this.time3 += time3;
+        this.style4 += style4;
+        this.time4 += time4;
+        this.style5 += style5;
+        this.time5 += time5;
+
+        setTimeout(() => {
+            document.querySelector(this.variable).style.cssText = this.style1;
+        }, this.time1);
+
+        if (style2 !== undefined) {
+            setTimeout(() => {
+                document.querySelector(this.variable).style.cssText = this.style2;
+            }, this.time2);
+        } else {
+            null;
+        }
+
+        if (style3 !== undefined) {
+            setTimeout(() => {
+                document.querySelector(this.variable).style.cssText = this.style3;
+            }, this.time3);
+        } else {}
+        null;
+        if (style4 !== undefined) {
+            setTimeout(() => {
+                document.querySelector(this.variable).style.cssText = this.style4;
+            }, this.time4);
+        } else {}
+        null;
+        if (style5 !== undefined) {
+            setTimeout(() => {
+                document.querySelector(this.variable).style.cssText = this.style5;
+            }, this.time5);
+        } else {}
+        null;
+    }
+}
+
+// to make Css styles with timing
+// const css = new StyleCss();
+// css.css("#valuePL1","color: red;font-size:8em;transition: all 2s;",2000,"color: blue;font-size:4em;transition: all 2s;",3000,"color: yellow;transition: all 2s;",4000);
+// to make Css styles with timing
+
+// -----------Class Creation Section for Javascript-----------
+
 // Action cliquer sur le dé
 window.addEventListener("click", onPointerMove);
 // Action cliquer sur le dé
 
-// ***************Animation du dé pour le joueur 1***************
-const AnimationOfDiceForPlayer_1 = () => {
+// ***************Animation du dé***************
+
+// *******Déclaration des variables*******
+initPL1();
+initPL2();
+let number = [0];
+let totalNumberPl1 = 0;
+let totalNumberPl2 = 0;
+// *******Déclaration des variables*******
+
+const AnimationOfDiceForPlayer = () => {
     // fonction aléatoire
     const randomY = gsap.utils.random([450, 540, 630, 720, 810, 900, 990, 1080]);
     const randomX = gsap.utils.random([
@@ -254,7 +348,7 @@ const AnimationOfDiceForPlayer_1 = () => {
     const sound = new Sound();
     // Instancier le son
 
-    // ***************retourner la valeur du dé, avec les  axes x et y***************
+    // ***************return the value of the dice, with the x and y axes***************
     if (
         (randomY === 450 ||
             randomY === 540 ||
@@ -268,7 +362,9 @@ const AnimationOfDiceForPlayer_1 = () => {
     ) {
         sound.sound(0, 950, 1, 2100, 2, 2700);
 
-        // console.log("numéro °= 1");
+        number.push(1);
+
+        // console.log("number °= 1");
     } else if (
         (randomY === 540 && randomX === 1350) ||
         (randomY === 540 && randomX === 270) ||
@@ -280,7 +376,10 @@ const AnimationOfDiceForPlayer_1 = () => {
         (randomY === 1080 && randomX === 90)
     ) {
         sound.sound(0, 950, 1, 2100);
-        // console.log("numéro °= 2");
+
+        number.push(2);
+
+        // console.log("number °= 2");
     } else if (
         (randomY === 450 && randomX === 1350) ||
         (randomY === 450 && randomX === 270) ||
@@ -292,7 +391,10 @@ const AnimationOfDiceForPlayer_1 = () => {
         (randomY === 990 && randomX === 90)
     ) {
         sound.sound(0, 950, 1, 2100);
-        // console.log("numéro °= 3");
+
+        number.push(3);
+
+        // console.log("number °= 3");
     } else if (
         (randomY === 450 && randomX === 1170) ||
         (randomY === 450 && randomX === 90) ||
@@ -304,7 +406,10 @@ const AnimationOfDiceForPlayer_1 = () => {
         (randomY === 990 && randomX === 270)
     ) {
         sound.sound(0, 950, 1, 2100);
-        // console.log("numéro °= 4");
+
+        number.push(4);
+
+        // console.log("number °= 4");
     } else if (
         (randomY === 540 && randomX === 1170) ||
         (randomY === 540 && randomX === 90) ||
@@ -316,7 +421,10 @@ const AnimationOfDiceForPlayer_1 = () => {
         (randomY === 1080 && randomX === 270)
     ) {
         sound.sound(0, 950, 1, 2100);
-        // console.log("numéro °= 5");
+
+        number.push(5);
+
+        // console.log("number °= 5");
     } else if (
         (randomY === 450 ||
             randomY === 540 ||
@@ -329,27 +437,97 @@ const AnimationOfDiceForPlayer_1 = () => {
         (randomX === 180 || randomX === 1260)
     ) {
         sound.sound(0, 950, 1, 2100);
-        // console.log("numéro °= 6");
+
+        number.push(6);
+
+        // console.log("number °= 6");
     } else {
-        // console.log("non défini");
+        // console.log("undefined");
     }
-    // ***************retourner la valeur du dé, avec les  axes x et y***************
+    // ***************return the value of the dice, with the x and y axes***************
+
+    const valuePL2 = document.querySelector("#valuePL2");
+    const valuePL1 = document.querySelector("#valuePL1");
+
+    // returns the sum add
+
+    if (switched == 1) {
+        setTimeout(() => {
+            valuePL1.innerText = number.reduce(addsUpPoints);
+            switchPlayer();
+        }, 1600);
+    } else if (switched == 2) {
+        setTimeout(() => {
+            valuePL2.innerText = number.reduce(addsUpPoints);
+            switchPlayer();
+        }, 1600);
+    }
 };
 
-// ***************Animation du dé pour le joueur 1***************
+// returns the sum add
 
+function addsUpPoints(total, num) {
+    if (num !== 1) {
+        return total + num;
+    } else {
+        number = [0];
+        return 0;
+    }
+}
+
+// ***************Animation du dé***************
 const animate = () => {
     requestAnimationFrame(animate);
 
     renderer.render(scene, camera);
 };
+// ***************Animation du dé***************
+
+//************************************************************
+//////// PLAYERS ARRAY ////////
+let player1 = {
+    name: "",
+    globalScore: 0,
+    roundScore: 0,
+};
+
+let player2 = {
+    name: "",
+    globalScore: 0,
+    roundScore: 0,
+};
+//////// PLAYERS ARRAY ////////
+
+//************************************************************
 
 // ***************animation en 2 dimensions***************
-// let cr = gsap.timeline();
 
-const numberPl1 = document.getElementById("numberPl1");
-const startPl1 = document.getElementById("startPl1");
-let number = 0;
+function focusPL1() {
+    // Instancier le StyleCss
+    const css = new StyleCss();
+    // Instancier le StyleCss
+
+    css.css(
+        "#focusPlay",
+        "transform: translateX(33vw) scale(1.2);border-radius: 2em;transition: 2s",
+        500,
+        "transform: translateX(0vw);border-radius: 7em;transition: all 2s;",
+        1500
+    );
+}
+
+function focusPL2() {
+    // Instancier le StyleCss
+    const css = new StyleCss();
+    // Instancier le StyleCss
+    css.css(
+        "#focusPlay",
+        "transform: translateX(33vw) scale(1.2);border-radius: 2em; transition: 2s",
+        500,
+        "transform: translateX(65.6vw);border-radius: 7em;transition: all 2s;",
+        1500
+    );
+}
 
 function loadImageNumber(value) {
     if (value < 10) {
@@ -361,46 +539,142 @@ function loadImageNumber(value) {
     }
 }
 
-// console.log(loadImageNumber(1));
+let switched = 1;
+console.log(switched);
+
+function switchPlayer() {
+    switch (switched) {
+        case 1:
+            if (number == 0 && switched == 1) {
+                switched = 2;
+                focusPL2();
+            }
+            break;
+        default:
+            if (number == 0 && switched == 2) {
+                switched = 1;
+                focusPL1();
+            }
+    }
+}
+// roulette animation
+
+let moveRoulette = document.querySelector(".centre_roulette");
+
+moveRoulette.addEventListener("click", roulette_animation);
+
+function roulette_animation() {
+    css1 = new StyleCss();
+    css2 = new StyleCss();
+
+    css1.css(
+        ".roulette",
+        "transform: scale(1.5) translate(30vw, -25vh);transition:all 1s",
+        200
+    );
+    css2.css(
+        ".centre_roulette",
+        "transform: scale(1.5) translate(30vw, -25vh);transition:all 1s",
+        200,
+        "transform: scale(1.5) translate(30vw, -25vh) rotate(10turn); transition: transform 10s cubic-bezier(0,-0.02,.04,1);",
+        1300
+    );
+}
+// roulette animation
 
 //******La fonction numberPl1 engendre l'animation et appelle les chiffres du résultat*****
+const numberPl1 = document.getElementById("numberPl1");
+const startPl1 = document.getElementById("startPl1");
+let totalPl1;
+
 numberPl1.addEventListener("click", () => {
-    // recherche un chiffre aléatoire de 0 à 100
-    loadImageNumber(Math.floor(Math.random() * 101));
-    // recherche un chiffre aléatoire de 0 à 100
+    if (switched == 2 || number == 0) {
+        console.log(null);
+        return null;
+    } else {
+        // Instancier le son
+        const sound = new Sound();
+        // Instancier le son
 
-    const sound1 = new Sound();
-    const sound2 = new Sound();
+        // numéro 4: l'armement        - number 4: the armament
+        // numéro 5: le relâchement    - number 5: the release
+        // numéro 6: le roulement      - number 6: the roller
+        sound.sound(4, 5, 5, 1150, 6, 3300);
 
-    // cr.to(".carrer", { rotation: 27, x: 100, duration: 1 });
+        // cr.to(".carrer", { rotation: 27, x: 100, duration: 1 });
+        totalPl1 = totalNumberPl1 + number.reduce(addsUpPoints);
+        loadImageNumber(totalPl1);
 
-    // numéro 4: l'armement        - number 4: the armament
-    // numéro 5: le relâchement    - number 5: the release
-    // numéro 6: le roulement      - number 6: the roller
+        // animation du gif Jackpot en 3D crée avec blender
+        startPl1.src = "model-3d/JackpotGif_3D_600dpi-min.gif";
+        // animation du gif Jackpot en 3D crée avec blender
 
-    startPl1.src = "model-3d/AnimationChiffres.webp";
-    sound1.sound(4, 170, 5, 1450);
-    sound2.sound(6, 4000);
-    // console.log(sound2);
+        setTimeout(() => {
+            numberPl1.setAttribute("style", "z-index: 0;");
+        }, 1450);
 
-    setTimeout(() => {
-        numberPl1.setAttribute("style", "z-index: 0;");
-    }, 1600);
+        setTimeout(() => {
+            numberPl1.src = `image/Image ${number}.png`;
+        }, 1550);
 
-    setTimeout(() => {
-        numberPl1.src = `image/Image ${number}.png`;
-        // console.log(numberPl1);
-        // console.log(number);
-        // numberPl1.src = "image/Image 001.png";
-        numberPl1.setAttribute("style", "z-index: 2;");
-
-        // animFix.setAttribute("src", "image/Image 005.png");
-        // animFix.setAttribute("style", "background-color:red;");
-        //  total1.style.backgroundImage = "url('')";
-        // total1.style.backgroundImage = "url('image/Image 005.png')";
-    }, 4400);
+        setTimeout(() => {
+            numberPl1.setAttribute("style", "z-index: 2;");
+            totalNumberPl1 = totalPl1;
+            number = [0];
+            switched = 2;
+            initPL1();
+            focusPL2();
+            animate();
+        }, 3500);
+    }
 });
 //******La fonction numberPl1 engendre l'animation et appelle les chiffres du résultat*****
+
+//******La fonction numberPl2 engendre l'animation et appelle les chiffres du résultat****const
+
+let totalPl2;
+
+numberPl2.addEventListener("click", () => {
+    if (switched == 1 || number == 0) {
+        console.log(null);
+        return null;
+    } else {
+        // Instancier le son
+        const sound = new Sound();
+        // Instancier le son
+
+        // numéro 4: l'armement        - number 4: the armament
+        // numéro 5: le relâchement    - number 5: the release
+        // numéro 6: le roulement      - number 6: the roller
+        sound.sound(4, 5, 5, 1150, 6, 3300);
+
+        totalPl2 = totalNumberPl2 + number.reduce(addsUpPoints);
+        loadImageNumber(totalPl2);
+
+        // animation du gif Jackpot en 3D crée avec blender
+        startPl2.src = "model-3d/JackpotGif_3D_600dpi-min.gif";
+        // animation du gif Jackpot en 3D crée avec blender
+
+        setTimeout(() => {
+            numberPl2.setAttribute("style", "z-index: 0;");
+        }, 1450);
+
+        setTimeout(() => {
+            numberPl2.src = `image/Image ${number}.png`;
+        }, 1550);
+
+        setTimeout(() => {
+            numberPl2.setAttribute("style", "z-index: 2;");
+            totalNumberPl2 = totalPl2;
+            number = [0];
+            switched = 1;
+            initPL2();
+            focusPL1();
+            animate();
+        }, 3500);
+    }
+});
+//******La fonction numberPl2 engendre l'animation et appelle les chiffres du résultat*****
 
 // ***************animation en 2 dimensions***************
 

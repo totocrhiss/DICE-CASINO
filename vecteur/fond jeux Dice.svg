@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: inkscape 2021 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="761px" height="421px" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
+viewBox="0 0 761 420.839"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.inkscape.com/inkscape/odm/2003">
+ <defs>
+    <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="251.516" y1="438.195" x2="509.484" y2="-17.356">
+     <stop offset="0" stop-opacity="1" stop-color="#494973"/>
+     <stop offset="0.501961" stop-opacity="1" stop-color="#000002"/>
+     <stop offset="1" stop-opacity="1" stop-color="#00125C"/>
+    </linearGradient>
+    <clipPath id="id1">
+     <rect x="679.244" y="0.32" width="81.435" height="197.508"/>
+    </clipPath>
+    <clipPath id="id2">
+     <rect x="453.49" y="0.32" width="307.189" height="321.214"/>
+    </clipPath>
+    <clipPath id="id3">
+     <rect x="713" y="55.717" width="47.679" height="131.964"/>
+    </clipPath>
+ </defs>
+ <g id="Plan_x0020_1">
+  <metadata id="fond_jeux_dice"/>
+  <g id="_2190489616768">
+   <rect fill="url(#id0)" stroke="black" stroke-width="0.64" stroke-miterlimit="22.9256" x="0.32" y="0.32" width="760.359" height="420.199"/>
+   <g clip-path="url(#id1)">
+    <image x="679.244" y="0.32" width="81.436" height="197.507" xlink:href="fond jeux Dice_Images\fond jeux Dice_ImgID1.png"/>
+   </g>
+   <g clip-path="url(#id2)">
+    <image x="453.49" y="0.32" width="307.19" height="321.214" xlink:href="fond jeux Dice_Images\fond jeux Dice_ImgID2.png"/>
+   </g>
+   <g clip-path="url(#id3)">
+    <image x="713" y="55.717" width="47.679" height="131.964" xlink:href="fond jeux Dice_Images\fond jeux Dice_ImgID3.png"/>
+   </g>
+  </g>
+ </g>
+</svg>
