@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(140, 127, 255);
+}
+
+
+/* #canvas {
+    border-radius: 50%;
+    background: rgb(90, 0, 78);
+    transform: rotateY(75deg);
+} */
+
+#bouton {
+    position: absolute;
+    bottom: 0.5em;
+    left: 0.5em;
+    width: 3.5em;
+    height: auto;
+    padding: 0.5em;
+    border-radius: 1.2em;
+    font-size: 2em;
+    background-color: blanchedalmond;
+    color: rgb(0, 0, 161);
+}
+
+#bouton:hover {
+    background-color: rgb(255, 196, 107);
+    transition: 0.8s;
+}
+
+.carrer {
+    position: absolute;
+    top: 5em;
+    left: 5em;
+    background-color: #40e22b;
+    width: 5em;
+    height: 5em;
+}
+
+.carrer2 {
+    position: absolute;
+    top: 5em;
+    left: 5em;
+    background-color: #e22bd3;
+    width: 5em;
+    height: 5em;
+}
