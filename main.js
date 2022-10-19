@@ -113,8 +113,14 @@ function onPointerMove(event) {
     const intersects = raycaster.intersectObjects(scene.children);
 
     if (intersects.length === 1) {
+        window.removeEventListener("click", onPointerMove);
+        setTimeout(() => {
+            window.addEventListener("click", onPointerMove);
+        }, 3000);
+        animate();
         AnimationOfDiceForPlayer();
     } else {
+        cancelAnimationFrame(startRequestAnimationFrame);
         null;
     }
 }
@@ -189,11 +195,15 @@ class Sound {
         this.time3 += time3;
 
         setTimeout(() => {
+            soundToon[this.number1].pause();
+            soundToon[this.number1].currentTime = 0;
             soundToon[this.number1].play();
         }, this.time1);
 
         if (number2 !== undefined) {
             setTimeout(() => {
+                soundToon[this.number2].pause();
+                soundToon[this.number2].currentTime = 0;
                 soundToon[this.number2].play();
             }, this.time2);
         } else {
@@ -202,6 +212,8 @@ class Sound {
 
         if (number3 !== undefined) {
             setTimeout(() => {
+                soundToon[this.number3].pause();
+                soundToon[this.number3].currentTime = 0;
                 soundToon[this.number3].play();
             }, this.time3);
         } else {}
@@ -315,7 +327,7 @@ class StyleCss {
 // -----------Class Creation Section for Javascript-----------
 
 // Action click on the dice
-window.addEventListener("click", onPointerMove);
+// window.addEventListener("click", onPointerMove);
 // Action click on the dice
 
 // *******variable declaration*******
@@ -327,157 +339,163 @@ let totalNumberPl2 = 0;
 // *******variable declaration*******
 
 const AnimationOfDiceForPlayer = () => {
-    // random function
-    const randomY = gsap.utils.random([450, 540, 630, 720, 810, 900, 990, 1080]);
-    const randomX = gsap.utils.random([
-        90, 180, 270, 360, 1170, 1260, 1350, 1440,
-    ]);
-    // random function
+    if (stopRule === true) {
+        // random function
+        const randomY = gsap.utils.random([
+            450, 540, 630, 720, 810, 900, 990, 1080,
+        ]);
+        const randomX = gsap.utils.random([
+            90, 180, 270, 360, 1170, 1260, 1350, 1440,
+        ]);
+        // random function
 
-    // Convert degrees to radians
-    const degY = (randomY * Math.PI) / 180.0;
-    const degX = (randomX * Math.PI) / 180.0;
-    // Convert degrees to radians
+        // Convert degrees to radians
+        const degY = (randomY * Math.PI) / 180.0;
+        const degX = (randomX * Math.PI) / 180.0;
+        // Convert degrees to radians
 
-    // dice animation
-    gsap.to(Mesh.rotation, { y: degY, x: degX, duration: 2 });
-    gsap.to(Mesh.position, {
-        duration: 2,
-        delay: 0.3,
-        ease: "bounce.out",
-        y: -10,
-    });
+        // dice animation
+        gsap.to(Mesh.rotation, { y: degY, x: degX, duration: 2 });
+        gsap.to(Mesh.position, {
+            duration: 2,
+            delay: 0.3,
+            ease: "bounce.out",
+            y: -10,
+        });
 
-    gsap.to(Mesh.position, {
-        duration: 1.5,
-        delay: 2.5,
-        ease: "power4.out",
-        y: 0,
-    });
-    // dice animation
+        gsap.to(Mesh.position, {
+            duration: 1.5,
+            delay: 2.5,
+            ease: "power4.out",
+            y: 0,
+        });
+        // dice animation
 
-    // Check the x and y value of the dice
-    // console.log(`degré Y ${randomY}`);
-    // console.log(`degré X ${randomX}`);
-    // Check the x and y value of the dice
+        // Check the x and y value of the dice
+        // console.log(`degré Y ${randomY}`);
+        // console.log(`degré X ${randomX}`);
+        // Check the x and y value of the dice
 
-    // Instantiate the sound
-    const sound = new Sound();
-    // Instantiate the sound
+        // Instantiate the sound
+        const sound = new Sound();
+        // Instantiate the sound
 
-    // ***************return the value of the dice, with the x and y axes***************
-    if (
-        (randomY === 450 ||
-            randomY === 540 ||
-            randomY === 630 ||
-            randomY === 720 ||
-            randomY === 810 ||
-            randomY === 900 ||
-            randomY === 990 ||
-            randomY === 1080) &&
-        (randomX === 360 || randomX === 1440)
-    ) {
-        sound.sound(0, 950, 1, 2100, 2, 2700);
+        // ***************return the value of the dice, with the x and y axes***************
+        if (
+            (randomY === 450 ||
+                randomY === 540 ||
+                randomY === 630 ||
+                randomY === 720 ||
+                randomY === 810 ||
+                randomY === 900 ||
+                randomY === 990 ||
+                randomY === 1080) &&
+            (randomX === 360 || randomX === 1440)
+        ) {
+            sound.sound(0, 950, 1, 2100, 2, 2700);
 
-        number.push(1);
+            number.push(1);
 
-        // console.log("number °= 1");
-    } else if (
-        (randomY === 540 && randomX === 1350) ||
-        (randomY === 540 && randomX === 270) ||
-        (randomY === 720 && randomX === 1170) ||
-        (randomY === 720 && randomX === 90) ||
-        (randomY === 900 && randomX === 270) ||
-        (randomY === 900 && randomX === 1350) ||
-        (randomY === 1080 && randomX === 1170) ||
-        (randomY === 1080 && randomX === 90)
-    ) {
-        sound.sound(0, 950, 1, 2100);
+            // console.log("number °= 1");
+        } else if (
+            (randomY === 540 && randomX === 1350) ||
+            (randomY === 540 && randomX === 270) ||
+            (randomY === 720 && randomX === 1170) ||
+            (randomY === 720 && randomX === 90) ||
+            (randomY === 900 && randomX === 270) ||
+            (randomY === 900 && randomX === 1350) ||
+            (randomY === 1080 && randomX === 1170) ||
+            (randomY === 1080 && randomX === 90)
+        ) {
+            sound.sound(0, 950, 1, 2100);
 
-        number.push(2);
+            number.push(200);
 
-        // console.log("number °= 2");
-    } else if (
-        (randomY === 450 && randomX === 1350) ||
-        (randomY === 450 && randomX === 270) ||
-        (randomY === 630 && randomX === 1170) ||
-        (randomY === 630 && randomX === 90) ||
-        (randomY === 810 && randomX === 1350) ||
-        (randomY === 810 && randomX === 270) ||
-        (randomY === 990 && randomX === 1170) ||
-        (randomY === 990 && randomX === 90)
-    ) {
-        sound.sound(0, 950, 1, 2100);
+            // console.log("number °= 2");
+        } else if (
+            (randomY === 450 && randomX === 1350) ||
+            (randomY === 450 && randomX === 270) ||
+            (randomY === 630 && randomX === 1170) ||
+            (randomY === 630 && randomX === 90) ||
+            (randomY === 810 && randomX === 1350) ||
+            (randomY === 810 && randomX === 270) ||
+            (randomY === 990 && randomX === 1170) ||
+            (randomY === 990 && randomX === 90)
+        ) {
+            sound.sound(0, 950, 1, 2100);
 
-        number.push(3);
+            number.push(300);
 
-        // console.log("number °= 3");
-    } else if (
-        (randomY === 450 && randomX === 1170) ||
-        (randomY === 450 && randomX === 90) ||
-        (randomY === 630 && randomX === 1350) ||
-        (randomY === 630 && randomX === 270) ||
-        (randomY === 810 && randomX === 90) ||
-        (randomY === 810 && randomX === 1170) ||
-        (randomY === 990 && randomX === 1350) ||
-        (randomY === 990 && randomX === 270)
-    ) {
-        sound.sound(0, 950, 1, 2100);
+            // console.log("number °= 3");
+        } else if (
+            (randomY === 450 && randomX === 1170) ||
+            (randomY === 450 && randomX === 90) ||
+            (randomY === 630 && randomX === 1350) ||
+            (randomY === 630 && randomX === 270) ||
+            (randomY === 810 && randomX === 90) ||
+            (randomY === 810 && randomX === 1170) ||
+            (randomY === 990 && randomX === 1350) ||
+            (randomY === 990 && randomX === 270)
+        ) {
+            sound.sound(0, 950, 1, 2100);
 
-        number.push(4);
+            number.push(400);
 
-        // console.log("number °= 4");
-    } else if (
-        (randomY === 540 && randomX === 1170) ||
-        (randomY === 540 && randomX === 90) ||
-        (randomY === 720 && randomX === 1350) ||
-        (randomY === 720 && randomX === 270) ||
-        (randomY === 900 && randomX === 90) ||
-        (randomY === 900 && randomX === 1170) ||
-        (randomY === 1080 && randomX === 1350) ||
-        (randomY === 1080 && randomX === 270)
-    ) {
-        sound.sound(0, 950, 1, 2100);
+            // console.log("number °= 4");
+        } else if (
+            (randomY === 540 && randomX === 1170) ||
+            (randomY === 540 && randomX === 90) ||
+            (randomY === 720 && randomX === 1350) ||
+            (randomY === 720 && randomX === 270) ||
+            (randomY === 900 && randomX === 90) ||
+            (randomY === 900 && randomX === 1170) ||
+            (randomY === 1080 && randomX === 1350) ||
+            (randomY === 1080 && randomX === 270)
+        ) {
+            sound.sound(0, 950, 1, 2100);
 
-        number.push(5);
+            number.push(500);
 
-        // console.log("number °= 5");
-    } else if (
-        (randomY === 450 ||
-            randomY === 540 ||
-            randomY === 630 ||
-            randomY === 720 ||
-            randomY === 810 ||
-            randomY === 900 ||
-            randomY === 990 ||
-            randomY === 1080) &&
-        (randomX === 180 || randomX === 1260)
-    ) {
-        sound.sound(0, 950, 1, 2100);
+            // console.log("number °= 5");
+        } else if (
+            (randomY === 450 ||
+                randomY === 540 ||
+                randomY === 630 ||
+                randomY === 720 ||
+                randomY === 810 ||
+                randomY === 900 ||
+                randomY === 990 ||
+                randomY === 1080) &&
+            (randomX === 180 || randomX === 1260)
+        ) {
+            sound.sound(0, 950, 1, 2100);
 
-        number.push(6);
+            number.push(600);
 
-        // console.log("number °= 6");
+            // console.log("number °= 6");
+        } else {
+            // console.log("undefined");
+        }
+        // ***************return the value of the dice, with the x and y axes***************
+
+        const valuePL2 = document.querySelector("#valuePL2");
+        const valuePL1 = document.querySelector("#valuePL1");
+
+        // returns the sum add
+
+        if (switched == 1) {
+            setTimeout(() => {
+                valuePL1.innerText = number.reduce(addsUpPoints);
+                switchPlayer();
+            }, 2500);
+        } else if (switched == 2) {
+            setTimeout(() => {
+                valuePL2.innerText = number.reduce(addsUpPoints);
+                switchPlayer();
+            }, 2500);
+        }
     } else {
-        // console.log("undefined");
-    }
-    // ***************return the value of the dice, with the x and y axes***************
-
-    const valuePL2 = document.querySelector("#valuePL2");
-    const valuePL1 = document.querySelector("#valuePL1");
-
-    // returns the sum add
-
-    if (switched == 1) {
-        setTimeout(() => {
-            valuePL1.innerText = number.reduce(addsUpPoints);
-            switchPlayer();
-        }, 2500);
-    } else if (switched == 2) {
-        setTimeout(() => {
-            valuePL2.innerText = number.reduce(addsUpPoints);
-            switchPlayer();
-        }, 2500);
+        null;
     }
 };
 
@@ -493,9 +511,16 @@ function addsUpPoints(total, num) {
 }
 
 // ***************dice animation 3D (THREE.JS)***************
+let startRequestAnimationFrame;
+
 const animate = () => {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
+    if (stopRule === true) {
+        startRequestAnimationFrame = requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+        console.log("animate !!!!");
+    } else {
+        null;
+    }
 };
 // ***************dice animation 3D (THREE.JS)***************
 
@@ -512,7 +537,6 @@ function winner() {
         }, 4000);
     } else if (totalPl2 >= 100) {
         number = 100;
-
         setTimeout(() => {
             animationWinnerOn();
         }, 4000);
@@ -537,13 +561,17 @@ function stopFocus() {
     if (totalPl1 >= 100 || totalPl2 >= 100) {
         null;
     } else if (totalPl1 < 100 && switched == 2) {
+        cancelAnimationFrame(startRequestAnimationFrame);
         focusPL2();
     } else if (totalPl2 < 100 && switched == 1) {
+        cancelAnimationFrame(startRequestAnimationFrame);
         focusPL1();
     }
 }
 
 function animationWinnerOff() {
+    stopRule = true;
+
     function visible() {
         // Instantiate the Style
         const css1 = new StyleCss();
@@ -580,11 +608,18 @@ function animationWinnerOff() {
     );
 }
 
+let stopRule = true;
+
 function animationWinnerOn() {
+    stopRule = false;
+    window.removeEventListener("click", onPointerMove);
+    cancelAnimationFrame(startRequestAnimationFrame);
+
     function hidden() {
         // Instantiate the Style
         const css1 = new StyleCss();
         const css2 = new StyleCss();
+        const css3 = new StyleCss();
         // Instantiate the Style
 
         css1.css(
@@ -596,6 +631,13 @@ function animationWinnerOn() {
         );
         css2.css(
             ".hidden2",
+            "opacity: 0;transition: 2s",
+            0,
+            "opacity: 0;transition: 0s;visibility: hidden",
+            2000
+        );
+        css3.css(
+            "#canvas",
             "opacity: 0;transition: 2s",
             0,
             "opacity: 0;transition: 0s;visibility: hidden",
@@ -694,6 +736,10 @@ function switchPlayer() {
     switch (switched) {
         case 1:
             if (number == 0 && switched == 1) {
+                window.removeEventListener("click", onPointerMove);
+                setTimeout(() => {
+                    window.addEventListener("click", onPointerMove);
+                }, 3500);
                 switched = 2;
                 focusPL2();
                 stopFocus();
@@ -701,6 +747,10 @@ function switchPlayer() {
             break;
         default:
             if (number == 0 && switched == 2) {
+                window.removeEventListener("click", onPointerMove);
+                setTimeout(() => {
+                    window.addEventListener("click", onPointerMove);
+                }, 3500);
                 switched = 1;
                 focusPL1();
                 stopFocus();
@@ -720,6 +770,8 @@ numberPl1.addEventListener("click", () => {
         // console.log(null);
         return null;
     } else {
+        window.removeEventListener("click", onPointerMove);
+        console.log("cancel Frame 1 !!!!");
         // Instantiate the sound
         const sound = new Sound();
         // Instantiate the sound
@@ -753,23 +805,31 @@ numberPl1.addEventListener("click", () => {
             totalNumberPl1 = totalPl1;
             number = [0];
             switched = 2;
-            initPL1();
             stopFocus();
-            animate();
+            initPL1();
+            setTimeout(() => {
+                animate();
+                cancelAnimationFrame(startRequestAnimationFrame);
+                window.addEventListener("click", onPointerMove);
+                console.log("totalNumberPl1 !!!!");
+            }, 3550);
         }, 3500);
     }
 });
 //******The numberPl1 function generates the animation and calls the result figures*****
 
 //******The numberPl2 function generates the animation and calls the result figures****
-
+const numberPl2 = document.getElementById("numberPl2");
+const startPl2 = document.getElementById("startPl2");
 let totalPl2;
 
 numberPl2.addEventListener("click", () => {
+    console.log("cancel Frame 2 !!!!");
     if (switched == 1 || number == 0) {
         console.log(null);
         return null;
     } else {
+        window.removeEventListener("click", onPointerMove);
         // Instantiate the sound
         const sound = new Sound();
         // Instantiate the sound
@@ -801,11 +861,24 @@ numberPl2.addEventListener("click", () => {
             switched = 1;
             initPL2();
             stopFocus();
-            animate();
+            setTimeout(() => {
+                animate();
+                cancelAnimationFrame(startRequestAnimationFrame);
+                window.addEventListener("click", onPointerMove);
+                console.log("totalNumberPl2 !!!!");
+            }, 3550);
         }, 3500);
     }
 });
 //******The numberPl2 function generates the animation and calls the result figures*****
+
+// if (totalNumberPl2 < 100) {
+//     animate();
+//     window.addEventListener("click", onPointerMove);
+//     console.log("totalNumberPl2 !!!!");
+// } else {
+//     null;
+// }
 
 // Playing the game rules
 
@@ -942,6 +1015,7 @@ function playStart2() {
     css3.css("#canvas", "opacity: 1;transition: opacity 6s;", 800);
     setTimeout(() => {
         animate();
+        cancelAnimationFrame(startRequestAnimationFrame);
         window.addEventListener("click", onPointerMove);
     }, 1000);
 }
