@@ -409,7 +409,7 @@ const AnimationOfDiceForPlayer = () => {
         ) {
             sound.sound(0, 950, 1, 2100);
 
-            number.push(200);
+            number.push(2);
 
             // console.log("number °= 2");
         } else if (
@@ -424,7 +424,7 @@ const AnimationOfDiceForPlayer = () => {
         ) {
             sound.sound(0, 950, 1, 2100);
 
-            number.push(300);
+            number.push(3);
 
             // console.log("number °= 3");
         } else if (
@@ -439,7 +439,7 @@ const AnimationOfDiceForPlayer = () => {
         ) {
             sound.sound(0, 950, 1, 2100);
 
-            number.push(400);
+            number.push(4);
 
             // console.log("number °= 4");
         } else if (
@@ -454,7 +454,7 @@ const AnimationOfDiceForPlayer = () => {
         ) {
             sound.sound(0, 950, 1, 2100);
 
-            number.push(500);
+            number.push(5);
 
             // console.log("number °= 5");
         } else if (
@@ -470,7 +470,7 @@ const AnimationOfDiceForPlayer = () => {
         ) {
             sound.sound(0, 950, 1, 2100);
 
-            number.push(600);
+            number.push(6);
 
             // console.log("number °= 6");
         } else {
@@ -517,7 +517,6 @@ const animate = () => {
     if (stopRule === true) {
         startRequestAnimationFrame = requestAnimationFrame(animate);
         renderer.render(scene, camera);
-        console.log("animate !!!!");
     } else {
         null;
     }
@@ -730,7 +729,6 @@ function loadImageNumber(value) {
 }
 
 let switched = 1;
-console.log(switched);
 
 function switchPlayer() {
     switch (switched) {
@@ -771,7 +769,6 @@ numberPl1.addEventListener("click", () => {
         return null;
     } else {
         window.removeEventListener("click", onPointerMove);
-        console.log("cancel Frame 1 !!!!");
         // Instantiate the sound
         const sound = new Sound();
         // Instantiate the sound
@@ -811,7 +808,6 @@ numberPl1.addEventListener("click", () => {
                 animate();
                 cancelAnimationFrame(startRequestAnimationFrame);
                 window.addEventListener("click", onPointerMove);
-                console.log("totalNumberPl1 !!!!");
             }, 3550);
         }, 3500);
     }
@@ -824,9 +820,7 @@ const startPl2 = document.getElementById("startPl2");
 let totalPl2;
 
 numberPl2.addEventListener("click", () => {
-    console.log("cancel Frame 2 !!!!");
     if (switched == 1 || number == 0) {
-        console.log(null);
         return null;
     } else {
         window.removeEventListener("click", onPointerMove);
@@ -865,20 +859,11 @@ numberPl2.addEventListener("click", () => {
                 animate();
                 cancelAnimationFrame(startRequestAnimationFrame);
                 window.addEventListener("click", onPointerMove);
-                console.log("totalNumberPl2 !!!!");
             }, 3550);
         }, 3500);
     }
 });
 //******The numberPl2 function generates the animation and calls the result figures*****
-
-// if (totalNumberPl2 < 100) {
-//     animate();
-//     window.addEventListener("click", onPointerMove);
-//     console.log("totalNumberPl2 !!!!");
-// } else {
-//     null;
-// }
 
 // Playing the game rules
 
